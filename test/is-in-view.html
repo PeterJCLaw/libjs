@@ -20,8 +20,8 @@
 			function makeCases(off) {
 				return [ { pos: 0, elem: '#top', visible: true }
 				       , { pos: 0, elem: '#bottom', visible: false }
-				       , { pos: 1, elem: '#top', visible: false }
-				       , { pos: 1, elem: '#bottom', visible: false }
+				       , { pos: off, elem: '#top', visible: false }
+				       , { pos: off, elem: '#bottom', visible: false }
 				       , { pos: 10, elem: '#top', visible: false }
 				       , { pos: 10, elem: '#bottom', visible: false }
 				       , { pos: ch() - off, elem: '#top', visible: false }
@@ -41,7 +41,7 @@
 			}, 'No margins');
 
 			container.addClass('margins');
-			var cases = makeCases(5);
+			var cases = makeCases(7);
 			runTests(cases, function (data) {
 				container.scrollTop(data.pos);
 				var elemInView = isScrolledIntoView(data.elem, container);
