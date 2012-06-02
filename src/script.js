@@ -65,9 +65,9 @@ FileListing.prototype._layoutChanged = function(event)
 		}
 	}.bind(this));
 
-	persistent = this._main.find('.placeholder');
-//	log(persistent);
-	$(persistent).each(function(i, placeholder) {
+	var placeholders = this._main.find('.placeholder');
+//	log(placeholders);
+	$(placeholders).each(function(i, placeholder) {
 		var inView = isScrolledIntoView(placeholder, this._element);
 		node = $(placeholder);
 //		log(i + ': ' + inView);
