@@ -44,6 +44,21 @@
 			}, 'With margins');
 		}
 		$(document).ready(runTest);
+		$(document).ready(function() {
+			var container = $('#file-browser');
+			container.scroll(function() {
+				var visible = $('li', '#visible');
+				$('li', container).each(function(index, elem) {
+					var displayNode = $(visible[index]);
+					var isVisible = isScrolledIntoView(elem, container);
+					if (isVisible) {
+						displayNode.addClass('visible');
+					} else {
+						displayNode.removeClass('visible');
+					}
+				});
+			});
+		});
 	</script>
 
 	<style type="text/css">
@@ -64,6 +79,9 @@
 			border-style: solid;
 			border-width: 2px 0;
 		}
+		#visible li.visible {
+			background-color: lightGray;
+		}
 	</style>
 </head>
 <body>
@@ -82,5 +100,13 @@
 			</ul>
 		</ul>
 	</div>
+	<ul id="visible" style="margin-top: 100px;">
+		<li><span>top li element</span></li>
+		<li><span>li element 2</span></li>
+		<li><span>li element 3</span></li>
+		<li><span>li element 4</span></li>
+		<li><span>li element 5</span></li>
+		<li><span>bottom li element</span></li>
+	</ul>
 </body>
 </html>
