@@ -5,6 +5,15 @@ div#result {
 	right: 30px;
 }
 
+div#result table caption {
+	cursor: pointer;
+}
+
+div#result table {
+	margin: 2px 0;
+	width: 100%;
+}
+
 div#result .fail {
 	background-color: #f66;
 }
@@ -24,4 +33,8 @@ div#result td {
 	padding: 2px 3px;
 	white-space: pre;
 	font-family: monospace;
+}
+
+div#result table.hidden tr {
+	display: none;
 }

@@ -35,7 +35,7 @@
 				container.scrollTop(data.pos);
 				var elemInView = isScrolledIntoView(data.elem, container);
 				Assert.areEqual(data.visible, elemInView, data.elem);
-			});
+			}, 'No margins');
 		}
 		$(document).ready(runTest);
 	</script>

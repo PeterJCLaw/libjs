@@ -17,10 +17,15 @@ var Assert = {
 	}
 };
 
-function runTests(cases, action)
+function runTests(cases, action, description)
 {
 	var resultBox = $('#result');
-	var resultTable = $('<table>');
+	var caption = $('<caption>').append(description);
+	var resultTable = $('<table>').append(caption);
+	caption.click(function() {
+		resultTable.toggleClass('hidden');
+	});
+	var overallResult = true;
 	resultBox.append(resultTable);
 	$(cases).each(function (index, data) {
 		var result = false;
@@ -35,5 +40,11 @@ function runTests(cases, action)
 		var row = $('<tr><th>{0}</th><td>{1}</td></tr>'.format(JSON.stringify(data), reason));
 		resultTable.append(row);
 		row.addClass(result ? 'pass' : 'fail');
+		overallResult = overallResult && result;
 	});
+	caption.addClass(overallResult ? 'pass' : 'fail');
+	if (overallResult)
+	{
+		resultTable.addClass('hidden');
+	}
 }
