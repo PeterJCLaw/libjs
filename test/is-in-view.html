@@ -15,28 +15,33 @@
 		function runTest()
 		{
 			var container = $('#file-browser');
-			var sh = container[0].scrollHeight - container.height();
+			function ch() { return container[0].scrollHeight - container.height(); }
 
-			var cases = [ { pos: 0, elem: '#top', visible: true }
-			            , { pos: 0, elem: '#bottom', visible: false }
-			            , { pos: 1, elem: '#top', visible: false }
-			            , { pos: 1, elem: '#bottom', visible: false }
-			            , { pos: 10, elem: '#top', visible: false }
-			            , { pos: 10, elem: '#bottom', visible: false }
-			            , { pos: sh - 1, elem: '#top', visible: false }
-			            , { pos: sh - 1, elem: '#bottom', visible: false }
-			            , { pos: sh, elem: '#top', visible: false }
-			            , { pos: sh, elem: '#bottom', visible: true }
-			            , { pos: 200, elem: '#top', visible: false }
-			            , { pos: 200, elem: '#bottom', visible: true }
-			            ];
+			function makeCases(off) {
+				return [ { pos: 0, elem: '#top', visible: true }
+				       , { pos: 0, elem: '#bottom', visible: false }
+				       , { pos: 1, elem: '#top', visible: false }
+				       , { pos: 1, elem: '#bottom', visible: false }
+				       , { pos: 10, elem: '#top', visible: false }
+				       , { pos: 10, elem: '#bottom', visible: false }
+				       , { pos: ch() - off, elem: '#top', visible: false }
+				       , { pos: ch() - off, elem: '#bottom', visible: false }
+				       , { pos: ch(), elem: '#top', visible: false }
+				       , { pos: ch(), elem: '#bottom', visible: true }
+				       , { pos: 200, elem: '#top', visible: false }
+				       , { pos: 200, elem: '#bottom', visible: true }
+				       ];
+			}
 
+			var cases = makeCases(1);
 			runTests(cases, function (data) {
 				container.scrollTop(data.pos);
 				var elemInView = isScrolledIntoView(data.elem, container);
 				Assert.areEqual(data.visible, elemInView, data.elem);
 			}, 'No margins');
+
 			container.addClass('margins');
+			var cases = makeCases(5);
 			runTests(cases, function (data) {
 				container.scrollTop(data.pos);
 				var elemInView = isScrolledIntoView(data.elem, container);
