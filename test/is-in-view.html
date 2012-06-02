@@ -50,12 +50,13 @@
 		}
 		$(document).ready(runTest);
 		$(document).ready(function() {
-			var container = $('#file-browser');
-			container.scroll(function() {
-				var visible = $('li', '#visible');
+			var containerBox = $('#file-browser');
+			var container = $('ul.container', containerBox);
+			containerBox.scroll(function() {
+				var visible = $('#visible li');
 				$('li', container).each(function(index, elem) {
 					var displayNode = $(visible[index]);
-					var isVisible = isScrolledIntoView(elem, container);
+					var isVisible = isScrolledIntoView(elem, containerBox);
 					if (isVisible) {
 						displayNode.addClass('visible');
 					} else {
@@ -95,6 +96,7 @@
 	</div>
 	<div id="file-browser">
 		<ul>
+			<li>
 			<ul class="container">
 				<li id="top"><span>top li element</span></li>
 				<li><span>li element 2</span></li>
@@ -103,6 +105,7 @@
 				<li><span>li element 5</span></li>
 				<li id="bottom"><span>bottom li element</span></li>
 			</ul>
+			</li>
 		</ul>
 	</div>
 	<ul id="visible" style="margin-top: 100px;">
