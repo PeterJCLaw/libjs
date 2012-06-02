@@ -36,6 +36,12 @@
 				var elemInView = isScrolledIntoView(data.elem, container);
 				Assert.areEqual(data.visible, elemInView, data.elem);
 			}, 'No margins');
+			container.addClass('margins');
+			runTests(cases, function (data) {
+				container.scrollTop(data.pos);
+				var elemInView = isScrolledIntoView(data.elem, container);
+				Assert.areEqual(data.visible, elemInView, data.elem);
+			}, 'With margins');
 		}
 		$(document).ready(runTest);
 	</script>
@@ -52,6 +58,11 @@
 			list-style-type: none;
 			margin: 0;
 			padding: 0;
+		}
+		#file-browser.margins li {
+			border-color: lightgrey;
+			border-style: solid;
+			border-width: 2px 0;
 		}
 	</style>
 </head>
