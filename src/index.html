@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+	<title>Dummy page</title>
+
+	<link type="text/css" rel="stylesheet" href="file-listing.css" />
+
+	<script type="text/javascript" src="../ref/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="utils.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript">
+		var tree = [ { name: 'project 1', kind: 'ROOT', children:
+		               [ { name: 'other.mp3', kind: 'FILE', persist: true },
+		                 { name: 'folder 1', kind: 'FOLDER', children:
+		                   [ { name: 'a.txt', kind: 'FILE' }, { name: 'b.txt', kind: 'FILE' } ]
+		                 }, { name: 'folder 2', kind: 'FOLDER', children:
+		                   [ { name: 'a.sh', kind: 'FILE' }, { name: 'b.sh', kind: 'FILE' } ]
+		                 }, { name: 'more.mp3', kind: 'FILE', persist: true }
+		               ]
+		             }, { name: 'project 2', kind: 'ROOT', children:
+		               [ { name: 'folder 3', kind: 'FOLDER', children:
+		                   [ { name: 'a.py', kind: 'FILE' }, { name: 'b.py', kind: 'FILE' } ]
+		                 }, { name: 'folder 4', kind: 'FOLDER', children:
+		                   [ { name: 'a.rb', kind: 'FILE' }, { name: 'b.rb', kind: 'FILE' } ]
+		                 }
+		               ]
+		             }, { name: 'project 3', kind: 'ROOT', children:
+		               [ { name: 'bees.mp3', kind: 'FILE', persist: true },
+		                 { name: 'folder 6', kind: 'FOLDER', children:
+		                   [ { name: 'z.txt', kind: 'FILE' }, { name: 'y.txt', kind: 'FILE' } ]
+		                 }, { name: 'folder 9', kind: 'FOLDER', children:
+		                   [ { name: 'z.sh', kind: 'FILE' }, { name: 'x.sh', kind: 'FILE' } ]
+		                 }, { name: 'pony.mp3', kind: 'FILE', persist: true }
+		               ]
+		             }
+		           ];
+		$(document).ready(function() {
+			var fl = new FileListing('#file-browser');
+			fl.load(tree);
+		});
+	</script>
+</head>
+<body>
+	<div id="file-browser"></div>
+</body>
+</html>

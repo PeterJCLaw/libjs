@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+	<title>Is In View test.</title>
+
+	<link type="text/css" rel="stylesheet" href="tests.css" />
+
+	<script type="text/javascript" src="../ref/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="test-utils.js"></script>
+	<script type="text/javascript" src="../src/utils.js"></script>
+	<script type="text/javascript" src="../src/script.js"></script>
+	<script type="text/javascript">
+		function runTest()
+		{
+			var container = $('#file-browser');
+			var sh = container[0].scrollHeight - container.height();
+
+			var cases = [ { pos: 0, elem: '#top', visible: true }
+			            , { pos: 0, elem: '#bottom', visible: false }
+			            , { pos: 1, elem: '#top', visible: false }
+			            , { pos: 1, elem: '#bottom', visible: false }
+			            , { pos: 10, elem: '#top', visible: false }
+			            , { pos: 10, elem: '#bottom', visible: false }
+			            , { pos: sh - 1, elem: '#top', visible: false }
+			            , { pos: sh - 1, elem: '#bottom', visible: false }
+			            , { pos: sh, elem: '#top', visible: false }
+			            , { pos: sh, elem: '#bottom', visible: true }
+			            , { pos: 200, elem: '#top', visible: false }
+			            , { pos: 200, elem: '#bottom', visible: true }
+			            ];
+
+			runTests(cases, function (data) {
+				container.scrollTop(data.pos);
+				var elemInView = isScrolledIntoView(data.elem, container);
+				Assert.areEqual(data.visible, elemInView, data.elem);
+			});
+		}
+		$(document).ready(runTest);
+	</script>
+
+	<style type="text/css">
+		#file-browser {
+			height: 40px;
+			position: fixed;
+			overflow-y: auto;
+			top: 40px;
+			width: 300px;
+		}
+		#file-browser ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="result" class="fail">
+		Results:
+	</div>
+	<div id="file-browser">
+		<ul>
+			<ul class="container">
+				<li id="top"><span>top li element</span></li>
+				<li><span>a li element</span></li>
+				<li><span>a li element</span></li>
+				<li><span>a li element</span></li>
+				<li><span>a li element</span></li>
+				<li id="bottom"><span>bottom li element</span></li>
+			</ul>
+		</ul>
+	</div>
+</body>
+</html>

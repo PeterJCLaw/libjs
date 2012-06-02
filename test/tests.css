@@ -1,0 +1,27 @@
+div#result {
+	top: 20px;
+	padding: 40px;
+	position: fixed;
+	right: 30px;
+}
+
+div#result .fail {
+	background-color: #f66;
+}
+
+div#result .pass {
+	background-color: #8f8;
+	color: grey;
+}
+
+div#result th {
+	font-weight: normal;
+	padding: 2px 3px;
+	text-align: right;
+}
+
+div#result td {
+	padding: 2px 3px;
+	white-space: pre;
+	font-family: monospace;
+}
