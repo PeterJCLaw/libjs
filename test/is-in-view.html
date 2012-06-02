@@ -18,18 +18,18 @@
 			function ch() { return container[0].scrollHeight - container.height(); }
 
 			function makeCases(off) {
-				return [ { pos: 0, elem: '#top', visible: true }
-				       , { pos: 0, elem: '#bottom', visible: false }
-				       , { pos: off, elem: '#top', visible: false }
-				       , { pos: off, elem: '#bottom', visible: false }
-				       , { pos: 10, elem: '#top', visible: false }
-				       , { pos: 10, elem: '#bottom', visible: false }
-				       , { pos: ch() - off, elem: '#top', visible: false }
-				       , { pos: ch() - off, elem: '#bottom', visible: false }
-				       , { pos: ch(), elem: '#top', visible: false }
-				       , { pos: ch(), elem: '#bottom', visible: true }
-				       , { pos: 200, elem: '#top', visible: false }
-				       , { pos: 200, elem: '#bottom', visible: true }
+				return [ { pos: 0, elem: '#top', visible: INVIEW }
+				       , { pos: 0, elem: '#bottom', visible: BELOW }
+				       , { pos: off, elem: '#top', visible: ABOVE }
+				       , { pos: off, elem: '#bottom', visible: BELOW }
+				       , { pos: 10, elem: '#top', visible: ABOVE }
+				       , { pos: 10, elem: '#bottom', visible: BELOW }
+				       , { pos: ch() - off, elem: '#top', visible: ABOVE }
+				       , { pos: ch() - off, elem: '#bottom', visible: BELOW }
+				       , { pos: ch(), elem: '#top', visible: ABOVE }
+				       , { pos: ch(), elem: '#bottom', visible: INVIEW }
+				       , { pos: 200, elem: '#top', visible: ABOVE }
+				       , { pos: 200, elem: '#bottom', visible: INVIEW }
 				       ];
 			}
 
@@ -56,12 +56,9 @@
 				var visible = $('#visible li');
 				$('li', container).each(function(index, elem) {
 					var displayNode = $(visible[index]);
-					var isVisible = isScrolledIntoView(elem, containerBox);
-					if (isVisible) {
-						displayNode.addClass('visible');
-					} else {
-						displayNode.removeClass('visible');
-					}
+					var visClass = isScrolledIntoView(elem, containerBox);
+					displayNode.removeClass(INVIEW).removeClass(ABOVE).removeClass(BELOW);
+					displayNode.addClass(visClass);
 				});
 			});
 		});
@@ -85,8 +82,14 @@
 			border-style: solid;
 			border-width: 2px 0;
 		}
+		#visible li.above {
+			background-color: lightBlue;
+		}
 		#visible li.visible {
 			background-color: lightGray;
+		}
+		#visible li.below {
+			background-color: lightGreen;
 		}
 	</style>
 </head>

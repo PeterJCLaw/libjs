@@ -56,7 +56,7 @@ FileListing.prototype._layoutChanged = function(event)
 		var inView = isScrolledIntoView(node, this._element);
 		node = $(node);
 //		log(i + ': ' + inView);
-		if (!inView)
+		if (inView != INVIEW)
 		{
 			var placeholder = node.clone().removeClass('persist').addClass('placeholder');
 			placeholder[0].originalNode = node;
@@ -71,12 +71,14 @@ FileListing.prototype._layoutChanged = function(event)
 		var inView = isScrolledIntoView(placeholder, this._element);
 		node = $(placeholder);
 //		log(i + ': ' + inView);
-		if (inView)
+		if (inView == INVIEW)
 		{
 			node.replaceWith(placeholder.originalNode);
 		}
 	}.bind(this));
 }
+
+var INVIEW = 'visible', ABOVE = 'above', BELOW = 'below';
 
 function isScrolledIntoView(elem, parent)
 {
@@ -87,6 +89,17 @@ function isScrolledIntoView(elem, parent)
 	var elemTop = $(elem).offset().top;
 	var elemBottom = elemTop + $(elem).height();
 
-	return ((elemBottom >= parentTop) && (elemTop <= parentBottom)
-	     && (elemBottom <= parentBottom) && (elemTop >= parentTop) );
+	if ( (elemBottom >= parentTop) && (elemTop <= parentBottom)
+	  && (elemBottom <= parentBottom) && (elemTop >= parentTop) )
+	{
+		return INVIEW;
+	}
+	else if (elemBottom < parentBottom)
+	{
+		return ABOVE;
+	}
+	else
+	{
+		return BELOW;
+	}
 }
