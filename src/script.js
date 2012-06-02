@@ -61,7 +61,14 @@ FileListing.prototype._layoutChanged = function(event)
 			var placeholder = node.clone().removeClass('persist').addClass('placeholder');
 			placeholder[0].originalNode = node;
 			node.replaceWith(placeholder);
-			this._top.append(node);
+			if (inView == ABOVE)
+			{
+				this._top.append(node);
+			}
+			else if (inView == BELOW)
+			{
+				this._bottom.append(node);
+			}
 		}
 	}.bind(this));
 

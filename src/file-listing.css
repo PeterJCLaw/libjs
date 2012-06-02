@@ -51,7 +51,7 @@ ul.file-listing.top {
 
 #file-browser {
 	border: 1px solid lightgrey;
-	bottom: 0;
+	bottom: 40px;
 	overflow-y: auto;
 	padding: 0 10px;
 	position: absolute;
